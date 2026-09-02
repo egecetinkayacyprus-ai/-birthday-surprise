@@ -1693,6 +1693,931 @@
   }
 
 </script>
+
+<!-- ================================= -->
+<!-- LEVEL 3 — HEART RUSH ❤️‍🔥 -->
+<!-- ================================= -->
+
+<style>
+  #heartGameScreen {
+    display: none;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, #2c101b 0%, #090909 42%, #000 100%);
+    color: white;
+    padding: 45px 20px 70px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    overflow: hidden;
+  }
+
+  #heartGameScreen.active {
+    display: block;
+  }
+
+  .heart-game-wrap {
+    max-width: 430px;
+    margin: auto;
+  }
+
+  .heart-game-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .heart-game-level {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #ff80a5;
+  }
+
+  .heart-score {
+    font-size: 14px;
+    color: #aaa;
+  }
+
+  #heartGameTitle {
+    font-size: 39px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+  }
+
+  .heart-game-desc {
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .game-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .game-pill {
+    flex: 1;
+    background: #111;
+    border: 1px solid #252525;
+    border-radius: 16px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .game-pill span {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 4px;
+  }
+
+  .game-pill strong {
+    font-size: 21px;
+  }
+
+  #heartArena {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 28px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at center, rgba(255,80,130,.08), transparent 55%),
+      #080808;
+    border: 1px solid #222;
+  }
+
+  .catch-heart {
+    position: absolute;
+    border: 0;
+    background: transparent;
+    font-size: 38px;
+    padding: 4px;
+    cursor: pointer;
+    animation: heartPop .22s ease;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .catch-heart:active {
+    transform: scale(.8);
+  }
+
+  @keyframes heartPop {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  #startHeartGame {
+    width: 100%;
+    margin-top: 18px;
+    border: 0;
+    border-radius: 999px;
+    padding: 16px;
+    background: white;
+    color: #111;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  #heartGameMessage {
+    text-align: center;
+    color: #aaa;
+    min-height: 45px;
+    margin-top: 15px;
+    line-height: 1.5;
+  }
+
+
+  /* FAKE CRASH */
+
+  #loveCrashScreen {
+    display: none;
+    min-height: 100vh;
+    background: #000;
+    color: white;
+    padding: 60px 22px;
+    font-family: monospace;
+  }
+
+  #loveCrashScreen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .crash-wrap {
+    width: 100%;
+    max-width: 430px;
+  }
+
+  .crash-icon {
+    font-size: 48px;
+    margin-bottom: 25px;
+  }
+
+  .crash-title {
+    color: #ff4f75;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .crash-line {
+    color: #aaa;
+    line-height: 1.8;
+    min-height: 29px;
+  }
+
+  .crash-green {
+    color: #6cff9b;
+  }
+
+  .crash-pink {
+    color: #ff83aa;
+  }
+
+  #recoveryButton {
+    display: none;
+    margin-top: 30px;
+    border: 1px solid #333;
+    border-radius: 999px;
+    background: #111;
+    color: white;
+    padding: 15px 22px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+  }
+
+
+  /* FUTURE UNLOCK */
+
+  #futureScreen {
+    display: none;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, #1f1325, #080808 45%, #000);
+    color: white;
+    padding: 60px 22px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  }
+
+  #futureScreen.active {
+    display: block;
+  }
+
+  .future-wrap {
+    max-width: 430px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .future-small {
+    color: #ff82aa;
+    letter-spacing: 3px;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  .future-title {
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+  }
+
+  .future-loading {
+    width: 100%;
+    height: 8px;
+    background: #222;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  #futureBar {
+    width: 0%;
+    height: 100%;
+    background: #ff739e;
+    transition: width .35s ease;
+  }
+
+  #futurePercent {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  #futureMessage {
+    color: #aaa;
+    min-height: 70px;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  #futureComplete {
+    display: none;
+    margin-top: 35px;
+    padding: 22px;
+    border: 1px solid #292929;
+    border-radius: 24px;
+    background: rgba(255,255,255,.04);
+  }
+
+  #futureComplete h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  #futureComplete p {
+    color: #aaa;
+    line-height: 1.7;
+  }
+</style>
+
+
+<section id="heartGameScreen">
+
+  <div class="heart-game-wrap">
+
+    <div class="heart-game-top">
+
+      <div class="heart-game-level">
+        LEVEL 3 / HEART RUSH
+      </div>
+
+      <div class="heart-score">
+        ❤️ x <span id="heartScoreTop">0</span>
+      </div>
+
+    </div>
+
+    <h1 id="heartGameTitle">
+      Kalbimi yakala,<br>
+      aşkım. ❤️
+    </h1>
+
+    <p class="heart-game-desc">
+      15 saniyen var.
+      Kalpleri yakala ama dikkat...
+      kırık kalplere dokunma. 💔
+    </p>
+
+    <div class="game-info">
+
+      <div class="game-pill">
+        <span>SÜRE</span>
+        <strong id="heartTime">15</strong>
+      </div>
+
+      <div class="game-pill">
+        <span>SKOR</span>
+        <strong id="heartScore">0</strong>
+      </div>
+
+    </div>
+
+    <div id="heartArena"></div>
+
+    <button id="startHeartGame">
+      Oyunu başlat ❤️‍🔥
+    </button>
+
+    <div id="heartGameMessage">
+      Bakalım kalbimi kaç kere yakalayacaksın. 😌
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="loveCrashScreen">
+
+  <div class="crash-wrap">
+
+    <div class="crash-icon">
+      ⚠️
+    </div>
+
+    <div class="crash-title">
+      SYSTEM ERROR
+    </div>
+
+    <div id="crash1" class="crash-line"></div>
+    <div id="crash2" class="crash-line"></div>
+    <div id="crash3" class="crash-line"></div>
+    <div id="crash4" class="crash-line"></div>
+    <div id="crash5" class="crash-line"></div>
+
+    <button id="recoveryButton">
+      Recover system
+    </button>
+
+  </div>
+
+</section>
+
+
+<section id="futureScreen">
+
+  <div class="future-wrap">
+
+    <div class="future-small">
+      LEVEL 4 / FUTURE.exe
+    </div>
+
+    <h1 class="future-title">
+      Geleceğimiz<br>
+      yükleniyor...
+    </h1>
+
+    <div class="future-loading">
+      <div id="futureBar"></div>
+    </div>
+
+    <div id="futurePercent">
+      0%
+    </div>
+
+    <div id="futureMessage">
+      Başlatılıyor...
+    </div>
+
+    <div id="futureComplete">
+
+      <div style="font-size:52px;margin-bottom:15px;">
+        ❤️
+      </div>
+
+      <h2>
+        Future successfully created.
+      </h2>
+
+      <p>
+        Daha fazla kahkaha.<br>
+        Daha fazla yolculuk.<br>
+        Daha fazla saçmalık.<br>
+        Daha fazla Lucy.<br>
+        Daha fazla biz.
+        <br><br>
+        Ve umarım daha çok doğum günü...
+        hep yan yana.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+  const nextLevelBtn =
+    document.getElementById("nextLevelButton");
+
+  if (nextLevelBtn) {
+
+    nextLevelBtn.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById("quizScreen")
+          .classList.remove("active");
+
+        document
+          .getElementById("heartGameScreen")
+          .classList.add("active");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  }
+
+
+  let heartScore = 0;
+  let heartTime = 15;
+  let heartTimer = null;
+  let spawnTimer = null;
+  let gameRunning = false;
+
+
+  const arena =
+    document.getElementById("heartArena");
+
+
+  document
+    .getElementById("startHeartGame")
+    .addEventListener(
+      "click",
+      startHeartRush
+    );
+
+
+  function startHeartRush() {
+
+    if (gameRunning) return;
+
+    gameRunning = true;
+    heartScore = 0;
+    heartTime = 15;
+
+    arena.innerHTML = "";
+
+    document
+      .getElementById("heartScore")
+      .textContent = 0;
+
+    document
+      .getElementById("heartScoreTop")
+      .textContent = 0;
+
+    document
+      .getElementById("heartTime")
+      .textContent = 15;
+
+    document
+      .getElementById("startHeartGame")
+      .style.display = "none";
+
+    document
+      .getElementById("heartGameMessage")
+      .textContent =
+      "Hadi minik farem! 🐭❤️";
+
+
+    spawnTimer =
+      setInterval(
+        spawnHeart,
+        520
+      );
+
+
+    heartTimer =
+      setInterval(
+        () => {
+
+          heartTime--;
+
+          document
+            .getElementById("heartTime")
+            .textContent =
+            heartTime;
+
+          if (heartTime <= 0) {
+
+            endHeartRush();
+
+          }
+
+        },
+        1000
+      );
+
+  }
+
+
+  function spawnHeart() {
+
+    if (!gameRunning) return;
+
+    const item =
+      document.createElement("button");
+
+    item.className =
+      "catch-heart";
+
+    const broken =
+      Math.random() < .18;
+
+    item.textContent =
+      broken ? "💔" :
+      (
+        Math.random() < .5
+          ? "❤️"
+          : "💗"
+      );
+
+    const maxX =
+      Math.max(
+        20,
+        arena.clientWidth - 60
+      );
+
+    const maxY =
+      Math.max(
+        20,
+        arena.clientHeight - 65
+      );
+
+    item.style.left =
+      Math.random() *
+      maxX +
+      "px";
+
+    item.style.top =
+      Math.random() *
+      maxY +
+      "px";
+
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        if (!gameRunning) return;
+
+        if (broken) {
+
+          heartScore =
+            Math.max(
+              0,
+              heartScore - 2
+            );
+
+          document
+            .getElementById(
+              "heartGameMessage"
+            )
+            .textContent =
+            "Aşkım kırık kalbe basma 😭💔";
+
+        } else {
+
+          heartScore++;
+
+          const messages = [
+            "Yakaladın ❤️",
+            "Benim kalbim zaten senindi 😌",
+            "Devam bebeğim 💗",
+            "Minik farem hızlı çıktı 🐭",
+            "Tamam tamam hepsi senin ❤️"
+          ];
+
+          document
+            .getElementById(
+              "heartGameMessage"
+            )
+            .textContent =
+            messages[
+              Math.floor(
+                Math.random() *
+                messages.length
+              )
+            ];
+
+        }
+
+        document
+          .getElementById("heartScore")
+          .textContent =
+          heartScore;
+
+        document
+          .getElementById("heartScoreTop")
+          .textContent =
+          heartScore;
+
+        item.remove();
+
+      }
+    );
+
+
+    arena.appendChild(item);
+
+
+    setTimeout(
+      () => {
+
+        if (
+          item &&
+          item.parentNode
+        ) {
+          item.remove();
+        }
+
+      },
+      1400
+    );
+
+  }
+
+
+  function endHeartRush() {
+
+    gameRunning = false;
+
+    clearInterval(
+      heartTimer
+    );
+
+    clearInterval(
+      spawnTimer
+    );
+
+    arena.innerHTML = "";
+
+    document
+      .getElementById(
+        "heartGameMessage"
+      )
+      .textContent =
+      "Skorun: " +
+      heartScore +
+      " ❤️";
+
+
+    setTimeout(
+      triggerLoveCrash,
+      1400
+    );
+
+  }
+
+
+  function sleepLove(ms) {
+
+    return new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          ms
+        )
+    );
+
+  }
+
+
+  async function typeCrash(
+    id,
+    text,
+    speed = 28
+  ) {
+
+    const el =
+      document.getElementById(id);
+
+    el.textContent = "";
+
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+      el.textContent +=
+        text[i];
+
+      await sleepLove(speed);
+
+    }
+
+  }
+
+
+  async function triggerLoveCrash() {
+
+    document
+      .getElementById(
+        "heartGameScreen"
+      )
+      .classList.remove("active");
+
+    document
+      .getElementById(
+        "loveCrashScreen"
+      )
+      .classList.add("active");
+
+
+    await sleepLove(600);
+
+    await typeCrash(
+      "crash1",
+      "> analyzing heart data..."
+    );
+
+    await sleepLove(350);
+
+    await typeCrash(
+      "crash2",
+      "> WARNING: abnormal love levels detected"
+    );
+
+    await sleepLove(500);
+
+    await typeCrash(
+      "crash3",
+      "> ERROR_CODE: EGE_LOVES_NIL_TOO_MUCH"
+    );
+
+    await sleepLove(650);
+
+    await typeCrash(
+      "crash4",
+      "> searching for solution..."
+    );
+
+    await sleepLove(900);
+
+    document
+      .getElementById("crash5")
+      .innerHTML =
+      '<span class="crash-green">' +
+      '> solution found: stay together ❤️' +
+      '</span>';
+
+
+    await sleepLove(650);
+
+    document
+      .getElementById(
+        "recoveryButton"
+      )
+      .style.display =
+      "inline-block";
+
+  }
+
+
+  document
+    .getElementById(
+      "recoveryButton"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById(
+            "loveCrashScreen"
+          )
+          .classList
+          .remove("active");
+
+        document
+          .getElementById(
+            "futureScreen"
+          )
+          .classList
+          .add("active");
+
+        window.scrollTo({
+          top: 0
+        });
+
+        runFutureLoading();
+
+      }
+    );
+
+
+  async function runFutureLoading() {
+
+    const futureSteps = [
+      {
+        percent: 12,
+        text:
+          "Daha fazla kahkaha ekleniyor..."
+      },
+      {
+        percent: 27,
+        text:
+          "Yeni anılar oluşturuluyor..."
+      },
+      {
+        percent: 41,
+        text:
+          "Lucy sisteme dahil ediliyor... 🐾"
+      },
+      {
+        percent: 58,
+        text:
+          "Yeni şehirler ve yolculuklar yükleniyor..."
+      },
+      {
+        percent: 73,
+        text:
+          "Sarılmalar sınırsız yapılıyor..."
+      },
+      {
+        percent: 89,
+        text:
+          "Minik farem korunuyor... 🐭❤️"
+      },
+      {
+        percent: 100,
+        text:
+          "Ege + Nil bağlantısı doğrulandı. ❤️"
+      }
+    ];
+
+
+    document
+      .getElementById(
+        "futureComplete"
+      )
+      .style.display =
+      "none";
+
+
+    for (
+      const step
+      of futureSteps
+    ) {
+
+      await sleepLove(800);
+
+      document
+        .getElementById(
+          "futureBar"
+        )
+        .style.width =
+        step.percent + "%";
+
+      document
+        .getElementById(
+          "futurePercent"
+        )
+        .textContent =
+        step.percent + "%";
+
+      document
+        .getElementById(
+          "futureMessage"
+        )
+        .textContent =
+        step.text;
+
+    }
+
+
+    await sleepLove(700);
+
+    document
+      .getElementById(
+        "futureComplete"
+      )
+      .style.display =
+      "block";
+
+  }
+
+</script>
 </body>
 
 </html>
