@@ -3472,6 +3472,407 @@ function finalExplosion() {
 }
 
 </script>
+
+<!-- ===================================== -->
+<!-- WAFFLE SURPRISE 🧇 -->
+<!-- ===================================== -->
+
+<style>
+
+#waffleTrigger {
+  margin-top: 35px;
+  border: 0;
+  padding: 17px 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  font-weight: 800;
+  transition: transform .35s ease, width .35s ease, height .35s ease;
+  position: relative;
+  z-index: 10001;
+}
+
+#waffleTrigger.grow1 {
+  transform: scale(1.25);
+}
+
+#waffleTrigger.grow2 {
+  transform: scale(1.7);
+}
+
+#waffleTrigger.grow3 {
+  transform: scale(3.5);
+}
+
+#waffleTrigger.fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  transform: none;
+  font-size: 0;
+  z-index: 10001;
+  background: #fff;
+}
+
+#waffleFlash {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  background: #fff;
+}
+
+#waffleFlash.active {
+  display: block;
+  animation: waffleFlash .75s ease forwards;
+}
+
+@keyframes waffleFlash {
+  0% { opacity: 1; }
+  35% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#waffleRevealScreen {
+  display: none;
+  min-height: 100vh;
+  background: #000;
+  color: white;
+  padding: 70px 24px 90px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+#waffleRevealScreen.active {
+  display: block;
+}
+
+.waffle-wrap {
+  max-width: 430px;
+  margin: auto;
+  text-align: center;
+}
+
+.waffle-terminal {
+  text-align: left;
+  font-family: monospace;
+  color: #8c8c8c;
+  line-height: 1.9;
+  min-height: 150px;
+  margin-bottom: 45px;
+}
+
+.waffle-terminal .ok {
+  color: #ff82aa;
+}
+
+.waffle-icon {
+  font-size: 95px;
+  margin-bottom: 20px;
+  animation: wafflePop .7s ease;
+}
+
+@keyframes wafflePop {
+  0% {
+    opacity: 0;
+    transform: scale(.2) rotate(-10deg);
+  }
+  70% {
+    transform: scale(1.15) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.waffle-title {
+  font-size: 46px;
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 20px;
+}
+
+.waffle-sub {
+  color: #aaa;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.waffle-main-message {
+  margin-top: 38px;
+  padding: 26px 22px;
+  background: #0b0b0b;
+  border: 1px solid #242424;
+  border-radius: 26px;
+  font-size: 22px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.waffle-package {
+  margin-top: 35px;
+  font-family: monospace;
+  color: #777;
+  font-size: 15px;
+}
+
+.waffle-last {
+  margin-top: 45px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.waffle-particle {
+  position: fixed;
+  z-index: 10003;
+  pointer-events: none;
+  animation: waffleBoom 1.6s ease-out forwards;
+}
+
+@keyframes waffleBoom {
+  0% {
+    opacity: 1;
+    transform: translate(0,0) scale(.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(1.4) rotate(90deg);
+  }
+}
+
+</style>
+
+
+<div id="waffleFlash"></div>
+
+<section id="waffleRevealScreen">
+  <div class="waffle-wrap">
+
+    <div class="waffle-terminal" id="waffleTerminal"></div>
+
+    <div id="waffleGift" style="display:none;">
+
+      <div class="waffle-icon">🧇</div>
+
+      <h1 class="waffle-title">
+        WAFFLE MAKİNESİ
+      </h1>
+
+      <p class="waffle-sub">
+        Evet bebeğim.<br>
+        Onu unutmadım.
+      </p>
+
+      <div class="waffle-main-message">
+        Asıl hediyen bu site değil. ❤️
+        <br><br>
+        Waffle makineni alıyorum.
+      </div>
+
+      <div class="waffle-package">
+        this_website = gift_wrapper;
+      </div>
+
+      <div class="waffle-last">
+        İyi ki doğdun minik farem. 🐭❤️
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+
+const realFinalBox =
+  document.getElementById("realFinal");
+
+if (realFinalBox) {
+
+  const waffleButton =
+    document.createElement("button");
+
+  waffleButton.id = "waffleTrigger";
+
+  waffleButton.textContent =
+    "Tamam… şimdi gerçek hediyene gelelim. 🎁";
+
+  realFinalBox.appendChild(waffleButton);
+
+  waffleButton.addEventListener("click", async () => {
+
+    waffleButton.disabled = true;
+
+    waffleButton.classList.add("grow1");
+    await waffleWait(500);
+
+    waffleButton.classList.remove("grow1");
+    waffleButton.classList.add("grow2");
+    await waffleWait(500);
+
+    waffleButton.classList.remove("grow2");
+    waffleButton.classList.add("grow3");
+    await waffleWait(550);
+
+    waffleButton.classList.remove("grow3");
+    waffleButton.classList.add("fullscreen");
+    await waffleWait(650);
+
+    waffleExplosion();
+
+    const flash =
+      document.getElementById("waffleFlash");
+
+    flash.classList.add("active");
+
+    await waffleWait(500);
+
+    document
+      .getElementById("finalProtocolScreen")
+      .classList.remove("active");
+
+    document
+      .getElementById("waffleRevealScreen")
+      .classList.add("active");
+
+    window.scrollTo({ top: 0 });
+
+    await waffleWait(300);
+
+    flash.classList.remove("active");
+
+    runWaffleReveal();
+
+  });
+
+}
+
+
+function waffleWait(ms) {
+  return new Promise(resolve =>
+    setTimeout(resolve, ms)
+  );
+}
+
+
+async function waffleTypeLine(text, className = "") {
+
+  const terminal =
+    document.getElementById("waffleTerminal");
+
+  const line =
+    document.createElement("div");
+
+  if (className) {
+    line.className = className;
+  }
+
+  terminal.appendChild(line);
+
+  for (let i = 0; i < text.length; i++) {
+    line.textContent += text[i];
+    await waffleWait(28);
+  }
+
+  await waffleWait(280);
+}
+
+
+async function runWaffleReveal() {
+
+  const terminal =
+    document.getElementById("waffleTerminal");
+
+  terminal.innerHTML = "";
+
+  await waffleTypeLine(
+    "> searching memory..."
+  );
+
+  await waffleTypeLine(
+    "> scanning Nil's requests..."
+  );
+
+  await waffleTypeLine(
+    "> request found."
+  );
+
+  await waffleTypeLine(
+    "> status: EGE DID NOT FORGET ✓",
+    "ok"
+  );
+
+  await waffleWait(900);
+
+  document
+    .getElementById("waffleGift")
+    .style.display = "block";
+}
+
+
+function waffleExplosion() {
+
+  const symbols = [
+    "🧇",
+    "✨",
+    "❤️",
+    "💥",
+    "🎁"
+  ];
+
+  for (let i = 0; i < 35; i++) {
+
+    const p =
+      document.createElement("div");
+
+    p.className =
+      "waffle-particle";
+
+    p.textContent =
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
+
+    p.style.left = "50vw";
+    p.style.top = "50vh";
+
+    p.style.setProperty(
+      "--x",
+      (
+        Math.random() * 800 - 400
+      ) + "px"
+    );
+
+    p.style.setProperty(
+      "--y",
+      (
+        Math.random() * 900 - 450
+      ) + "px"
+    );
+
+    p.style.fontSize =
+      (
+        20 +
+        Math.random() * 30
+      ) + "px";
+
+    document.body.appendChild(p);
+
+    setTimeout(
+      () => p.remove(),
+      1700
+    );
+  }
+}
+
+</script>
 </body>
 
 </html>
