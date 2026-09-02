@@ -2618,6 +2618,860 @@
   }
 
 </script>
+
+<!-- ===================================== -->
+<!-- FINAL PROTOCOL — 03.09.2002 ❤️ -->
+<!-- ===================================== -->
+
+<style>
+
+#finalProtocolScreen {
+  display: none;
+  min-height: 100vh;
+  background: #000;
+  color: white;
+  padding: 55px 22px 80px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+#finalProtocolScreen.active {
+  display: block;
+}
+
+.final-protocol-wrap {
+  max-width: 430px;
+  margin: auto;
+  text-align: center;
+}
+
+#finalProtocolButton {
+  margin-top: 30px;
+  border: 0;
+  padding: 17px 26px;
+  border-radius: 999px;
+  background: white;
+  color: #111;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.shutdown-title {
+  font-family: monospace;
+  color: #ff557d;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-bottom: 35px;
+}
+
+.shutdown-main {
+  font-family: monospace;
+  text-align: left;
+}
+
+.shutdown-line {
+  color: #999;
+  line-height: 1.9;
+  min-height: 30px;
+}
+
+.delete-bar {
+  width: 100%;
+  height: 7px;
+  background: #181818;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 30px 0 12px;
+}
+
+#deleteProgress {
+  width: 0%;
+  height: 100%;
+  background: #ff426c;
+  transition: width .25s linear;
+}
+
+#deletePercent {
+  font-family: monospace;
+  color: #888;
+  margin-bottom: 35px;
+}
+
+#cannotDelete {
+  display: none;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.error-big {
+  color: #ff527a;
+  font-family: monospace;
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.protected-title {
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.protected-sub {
+  color: #aaa;
+  line-height: 1.7;
+}
+
+#birthdayReveal {
+  display: none;
+  text-align: center;
+  padding-top: 55px;
+}
+
+.birth-date {
+  font-family: monospace;
+  color: #ff86aa;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+}
+
+.birthdayRevealTitle {
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 18px;
+}
+
+.birthdayRevealText {
+  color: #aaa;
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+#candles {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin: 35px auto;
+  max-width: 360px;
+}
+
+.candle {
+  border: 0;
+  background: #111;
+  border-radius: 18px;
+  min-height: 60px;
+  font-size: 30px;
+  transition: .25s ease;
+}
+
+.candle.off {
+  opacity: .25;
+  transform: scale(.75);
+}
+
+#candleCounter {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+#realFinal {
+  display: none;
+  animation: finalReveal 1.2s ease;
+}
+
+@keyframes finalReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.final-photo {
+  width: 100%;
+  border-radius: 28px;
+  display: block;
+  margin-bottom: 35px;
+}
+
+.final-letter-title {
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
+}
+
+.final-letter {
+  color: #c2c2c2;
+  font-size: 17px;
+  line-height: 1.85;
+  text-align: left;
+}
+
+.final-letter p {
+  margin-bottom: 22px;
+}
+
+.final-signature {
+  color: white;
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+.code-love {
+  margin-top: 50px;
+  padding: 24px;
+  border-radius: 22px;
+  background: #0b0b0b;
+  border: 1px solid #292929;
+  font-family: monospace;
+  text-align: left;
+  color: #aaa;
+  line-height: 1.8;
+}
+
+.code-love .pink-code {
+  color: #ff83aa;
+}
+
+.expiration {
+  text-align: center;
+  margin-top: 22px;
+  color: #777;
+  font-family: monospace;
+}
+
+.final-heart {
+  font-size: 70px;
+  text-align: center;
+  margin: 45px 0 20px;
+  animation: finalPulse 1.1s infinite;
+}
+
+@keyframes finalPulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.final-particle {
+  position: fixed;
+  bottom: -30px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: finalFly 3.5s ease-out forwards;
+}
+
+@keyframes finalFly {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-110vh) rotate(45deg);
+  }
+}
+
+</style>
+
+
+<section id="finalProtocolScreen">
+
+  <div class="final-protocol-wrap">
+
+    <div id="shutdownPart">
+
+      <div class="shutdown-title">
+        FINAL_PROTOCOL.exe
+      </div>
+
+      <div class="shutdown-main">
+
+        <div id="shutdown1" class="shutdown-line"></div>
+        <div id="shutdown2" class="shutdown-line"></div>
+        <div id="shutdown3" class="shutdown-line"></div>
+
+      </div>
+
+      <div class="delete-bar">
+        <div id="deleteProgress"></div>
+      </div>
+
+      <div id="deletePercent">
+        0%
+      </div>
+
+    </div>
+
+
+    <div id="cannotDelete">
+
+      <div class="error-big">
+        ERROR_0903
+      </div>
+
+      <h1 class="protected-title">
+        Connection cannot<br>
+        be deleted.
+      </h1>
+
+      <p class="protected-sub">
+        EGE + NIL bağlantısı sistem tarafından
+        kalıcı olarak korunuyor. ❤️
+      </p>
+
+    </div>
+
+
+    <div id="birthdayReveal">
+
+      <div class="birth-date">
+        03.09.2002
+      </div>
+
+      <h1 class="birthdayRevealTitle">
+        Bir dakika...
+      </h1>
+
+      <p class="birthdayRevealText">
+        Bugün bütün bu hikâyenin
+        en önemli insanının doğum günü.
+        <br><br>
+        Ve 24 yaşına giriyor. ❤️
+      </p>
+
+      <h2>
+        24 mum.<br>
+        24 dilek.
+      </h2>
+
+      <p style="color:#888;margin-top:12px;">
+        Hepsini söndür bebeğim.
+      </p>
+
+      <div id="candles"></div>
+
+      <div id="candleCounter">
+        0 / 24
+      </div>
+
+
+      <div id="realFinal">
+
+        <img
+          class="final-photo"
+          src="4EDF8020-148C-4096-A3F0-76433FE3595C.png"
+          alt="Ege ve Nil"
+        />
+
+        <h1 class="final-letter-title">
+          İyi ki doğdun aşkım.
+        </h1>
+
+        <div class="final-letter">
+
+          <p>
+            Sana bugün normal bir mesaj atıp
+            “iyi ki doğdun” demek istemedim.
+            Çünkü sen benim için normal bir insan
+            değilsin.
+          </p>
+
+          <p>
+            31 Ekim 2024'te hayatıma girdin.
+            O gün bu hikâyenin bizi nerelere
+            götüreceğini bilmiyordum.
+          </p>
+
+          <p>
+            Paris'i gördük.
+            Birlikte saçmaladık.
+            Bazen kavga ettik.
+            Bir sürü fotoğraf çektik.
+            Lucy hayatımızın bir parçası oldu.
+          </p>
+
+          <p>
+            Ama bütün bunların içinde
+            benim için değişmeyen tek bir şey var.
+          </p>
+
+          <p style="color:white;font-size:21px;font-weight:700;">
+            Ben hâlâ dönüp sana baktığımda
+            seni seçiyorum.
+          </p>
+
+          <p>
+            Yeni yaşında ne olursa olsun,
+            umarım çok gülersin.
+            İstediğin şeyleri başarırsın.
+            Kendini hep değerli hissedersin.
+          </p>
+
+          <p>
+            Ve umarım yıllar sonra bu siteyi
+            tekrar açtığımızda,
+            burada yazan şeylere bakıp
+            “ulan ne günlerdi” diye beraber güleriz.
+          </p>
+
+          <p class="final-signature">
+            Seni çok seviyorum bebeğim.<br>
+            İyi ki varsın minik farem. 🐭❤️
+            <br><br>
+            — Ege
+          </p>
+
+        </div>
+
+
+        <div class="code-love">
+
+          <span style="color:#777;">
+            // final build
+          </span>
+
+          <br><br>
+
+          while (alive) {<br>
+
+          &nbsp;&nbsp;
+          <span class="pink-code">
+            love("Nil");
+          </span>
+
+          <br>}
+
+        </div>
+
+        <div class="expiration">
+          No expiration date.
+        </div>
+
+        <div class="final-heart">
+          ❤️
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+const futureCompleteBox =
+  document.getElementById(
+    "futureComplete"
+  );
+
+
+if (futureCompleteBox) {
+
+  const protocolButton =
+    document.createElement(
+      "button"
+    );
+
+  protocolButton.id =
+    "finalProtocolButton";
+
+  protocolButton.textContent =
+    "Finish setup";
+
+  futureCompleteBox.appendChild(
+    protocolButton
+  );
+
+
+  protocolButton.addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "futureScreen"
+        )
+        .classList
+        .remove("active");
+
+      document
+        .getElementById(
+          "finalProtocolScreen"
+        )
+        .classList
+        .add("active");
+
+      window.scrollTo({
+        top: 0
+      });
+
+      runFinalProtocol();
+
+    }
+  );
+
+}
+
+
+function finalSleep(ms) {
+
+  return new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        ms
+      )
+  );
+
+}
+
+
+async function finalType(
+  id,
+  text,
+  speed = 30
+) {
+
+  const el =
+    document.getElementById(id);
+
+  el.textContent = "";
+
+  for (
+    let i = 0;
+    i < text.length;
+    i++
+  ) {
+
+    el.textContent +=
+      text[i];
+
+    await finalSleep(
+      speed
+    );
+
+  }
+
+}
+
+
+async function runFinalProtocol() {
+
+  await finalSleep(600);
+
+  await finalType(
+    "shutdown1",
+    "> finalizing experience..."
+  );
+
+  await finalSleep(400);
+
+  await finalType(
+    "shutdown2",
+    "> closing EGE_NIL connection..."
+  );
+
+  await finalSleep(700);
+
+  await finalType(
+    "shutdown3",
+    "> deleting relationship data..."
+  );
+
+
+  let progress = 0;
+
+  while (
+    progress < 99
+  ) {
+
+    progress +=
+      Math.floor(
+        Math.random() * 8
+      ) + 2;
+
+    if (
+      progress > 99
+    ) {
+      progress = 99;
+    }
+
+    document
+      .getElementById(
+        "deleteProgress"
+      )
+      .style.width =
+      progress + "%";
+
+    document
+      .getElementById(
+        "deletePercent"
+      )
+      .textContent =
+      progress + "%";
+
+    await finalSleep(
+      160
+    );
+
+  }
+
+
+  await finalSleep(1000);
+
+  document
+    .getElementById(
+      "shutdownPart"
+    )
+    .style.display =
+    "none";
+
+
+  document
+    .getElementById(
+      "cannotDelete"
+    )
+    .style.display =
+    "block";
+
+
+  await finalSleep(2500);
+
+
+  document
+    .getElementById(
+      "cannotDelete"
+    )
+    .style.display =
+    "none";
+
+
+  document
+    .getElementById(
+      "birthdayReveal"
+    )
+    .style.display =
+    "block";
+
+
+  createCandles();
+
+}
+
+
+let candlesOff = 0;
+
+
+function createCandles() {
+
+  const candleBox =
+    document.getElementById(
+      "candles"
+    );
+
+  candleBox.innerHTML = "";
+
+  candlesOff = 0;
+
+
+  for (
+    let i = 0;
+    i < 24;
+    i++
+  ) {
+
+    const candle =
+      document.createElement(
+        "button"
+      );
+
+    candle.className =
+      "candle";
+
+    candle.textContent =
+      "🕯️";
+
+
+    candle.addEventListener(
+      "click",
+      () => {
+
+        if (
+          candle.classList
+            .contains("off")
+        ) {
+          return;
+        }
+
+
+        candle.classList
+          .add("off");
+
+        candle.textContent =
+          "✨";
+
+        candlesOff++;
+
+
+        document
+          .getElementById(
+            "candleCounter"
+          )
+          .textContent =
+          candlesOff +
+          " / 24";
+
+
+        if (
+          candlesOff === 24
+        ) {
+
+          setTimeout(
+            revealRealFinal,
+            700
+          );
+
+        }
+
+      }
+    );
+
+
+    candleBox.appendChild(
+      candle
+    );
+
+  }
+
+}
+
+
+function revealRealFinal() {
+
+  document
+    .getElementById(
+      "candles"
+    )
+    .style.display =
+    "none";
+
+  document
+    .getElementById(
+      "candleCounter"
+    )
+    .style.display =
+    "none";
+
+
+  document
+    .getElementById(
+      "realFinal"
+    )
+    .style.display =
+    "block";
+
+
+  finalExplosion();
+
+
+  setTimeout(
+    () => {
+
+      document
+        .getElementById(
+          "realFinal"
+        )
+        .scrollIntoView({
+          behavior:
+            "smooth"
+        });
+
+    },
+    350
+  );
+
+}
+
+
+function finalExplosion() {
+
+  const symbols = [
+    "❤️",
+    "💗",
+    "✨",
+    "💕",
+    "🤍"
+  ];
+
+
+  for (
+    let i = 0;
+    i < 55;
+    i++
+  ) {
+
+    setTimeout(
+      () => {
+
+        const particle =
+          document.createElement(
+            "div"
+          );
+
+        particle.className =
+          "final-particle";
+
+        particle.textContent =
+          symbols[
+            Math.floor(
+              Math.random() *
+              symbols.length
+            )
+          ];
+
+        particle.style.left =
+          Math.random() *
+          100 +
+          "vw";
+
+        particle.style.fontSize =
+          (
+            18 +
+            Math.random() *
+            28
+          ) +
+          "px";
+
+        document.body.appendChild(
+          particle
+        );
+
+
+        setTimeout(
+          () =>
+            particle.remove(),
+          3700
+        );
+
+      },
+      i * 45
+    );
+
+  }
+
+}
+
+</script>
 </body>
 
 </html>
