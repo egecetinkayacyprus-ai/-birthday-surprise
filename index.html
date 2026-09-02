@@ -677,5 +677,492 @@
 
   </script>
 
+
+  <!-- ============================= -->
+<!-- NIL & EGE - OUR STORY V2 ❤️ -->
+<!-- ============================= -->
+
+<style>
+  #ourStoryScreen {
+    min-height: 100vh;
+    width: 100%;
+    display: none;
+    background:
+      radial-gradient(circle at top, #29131d 0%, #090909 38%, #000 100%);
+    color: white;
+    padding: 55px 20px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  }
+
+  #ourStoryScreen.active {
+    display: block;
+    animation: storyFade .8s ease;
+  }
+
+  .story-container {
+    width: 100%;
+    max-width: 430px;
+    margin: auto;
+  }
+
+  .story-kicker {
+    color: #ff88aa;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .story-main-title {
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+  }
+
+  .story-intro {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 45px;
+  }
+
+  .memory {
+    margin-bottom: 65px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .8s ease;
+  }
+
+  .memory.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .memory-date {
+    color: #ff8caf;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .memory h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+  }
+
+  .memory p {
+    color: #bbb;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .memory img {
+    width: 100%;
+    display: block;
+    border-radius: 24px;
+    object-fit: cover;
+    max-height: 560px;
+  }
+
+  .special-memory {
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 28px;
+    background: rgba(255,255,255,.04);
+  }
+
+  .lucy-tag {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  #storyFinal {
+    text-align: center;
+    padding: 35px 0 60px;
+  }
+
+  #storyFinal h2 {
+    font-size: 38px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+
+  #storyFinal p {
+    color: #aaa;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  #openStoryButton {
+    margin-top: 30px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.08);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 600;
+    backdrop-filter: blur(12px);
+  }
+
+  @keyframes storyFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+
+<section id="ourStoryScreen">
+
+  <div class="story-container">
+
+    <div class="story-kicker">
+      OUR STORY
+    </div>
+
+    <h1 class="story-main-title">
+      Bizim hikâyemiz.
+    </h1>
+
+    <p class="story-intro">
+      Bazı fotoğraflar sadece fotoğraf değildir.
+      Bazıları bir günü, bazıları bir şehri,
+      bazılarıysa bütün bir hayatı hatırlatır.
+    </p>
+
+
+    <!-- İLK TANIŞMA -->
+
+    <div class="memory special-memory">
+
+      <div class="memory-date">
+        31.10.2024
+      </div>
+
+      <h2>
+        Her şey burada başladı.
+      </h2>
+
+      <p>
+        O gün bu fotoğrafın bir gün benim için
+        bu kadar önemli olacağını bilmiyordum.
+        Daha doğrusu, senin bu kadar önemli
+        olacağını bilmiyordum aşkım.
+      </p>
+
+      <img
+        src="AE60FB15-8510-433C-87EB-ADFA9D2D00A5.png"
+        alt="İlk tanıştığımız an"
+      />
+
+    </div>
+
+
+    <!-- BİRLİKTE -->
+
+    <div class="memory">
+
+      <div class="memory-date">
+        US
+      </div>
+
+      <h2>
+        Sonra biz olduk.
+      </h2>
+
+      <p>
+        Bir sürü sıradan gün,
+        sen yanımdayken benim en sevdiğim
+        anılara dönüştü.
+      </p>
+
+      <img
+        src="23F211D8-766B-406B-A339-D8ECEA3A97A1.png"
+        alt="Biz"
+      />
+
+    </div>
+
+
+    <!-- TATİL -->
+
+    <div class="memory">
+
+      <div class="memory-date">
+        LITTLE MOMENTS
+      </div>
+
+      <h2>
+        Seninle her yer güzel.
+      </h2>
+
+      <p>
+        Bazen tek ihtiyacım olan şey
+        karşıma bakıp seni orada görmek.
+      </p>
+
+      <img
+        src="345EE2DB-B865-44B0-91C6-97B0BAEE8FB4.png"
+        alt="Tatilde birlikte"
+      />
+
+    </div>
+
+
+    <!-- PARIS -->
+
+    <div class="memory special-memory">
+
+      <div class="memory-date">
+        PARIS
+      </div>
+
+      <h2>
+        Bir şehirden daha fazlası.
+      </h2>
+
+      <p>
+        Dünyanın en güzel şehirlerinden birine gittik.
+        Ama dönüp baktığımda Paris'te bile
+        en çok hatırladığım şey sensin bebeğim.
+      </p>
+
+      <img
+        src="01E7C4E4-00D9-4EC8-ADD6-CE314CB2EE7E.png"
+        alt="Paris"
+      />
+
+    </div>
+
+
+    <!-- PARIS NIL -->
+
+    <div class="memory">
+
+      <div class="memory-date">
+        MY FAVORITE VIEW
+      </div>
+
+      <h2>
+        Benim manzaram.
+      </h2>
+
+      <p>
+        Fotoğrafın nerede çekildiğinden çok,
+        karşımdaki kişinin kim olduğu önemli.
+      </p>
+
+      <img
+        src="5DFE3FEA-FF90-4156-AE14-26BA442754DB.png"
+        alt="Nil Paris"
+      />
+
+    </div>
+
+
+    <!-- ÇİÇEK -->
+
+    <div class="memory">
+
+      <div class="memory-date">
+        FOR YOU
+      </div>
+
+      <h2>
+        Sana çiçek aldığım günlerden biri.
+      </h2>
+
+      <p>
+        Ama hiçbir çiçek
+        senin o fotoğraftaki gülüşünden
+        daha güzel değildi.
+      </p>
+
+      <img
+        src="C9A1C211-1971-42B6-B407-6A252A8ABC91.png"
+        alt="Nil ve çiçekler"
+      />
+
+    </div>
+
+
+    <!-- LUCY -->
+
+    <div class="memory special-memory">
+
+      <span class="lucy-tag">
+        🐾 OUR LITTLE FAMILY
+      </span>
+
+      <h2>
+        Ve tabii ki Lucy.
+      </h2>
+
+      <p>
+        Çünkü bu hikâyede artık
+        sadece sen ve ben yokuz. ❤️
+      </p>
+
+      <img
+        src="69BBDEBF-0F33-4811-A203-E8FC27D98FBE.png"
+        alt="Lucy"
+      />
+
+    </div>
+
+
+    <!-- SELFIE -->
+
+    <div class="memory">
+
+      <div class="memory-date">
+        MY GIRL
+      </div>
+
+      <h2>
+        Minik farem. 🐭❤️
+      </h2>
+
+      <p>
+        Bazen sinirimi bozuyorsun,
+        bazen ben seninkini...
+        ama günün sonunda yine
+        en çok seni istiyorum.
+      </p>
+
+      <img
+        src="35BEA4B8-D2ED-4E20-8DA9-D2B758FA7C8C.png"
+        alt="Birlikte selfie"
+      />
+
+    </div>
+
+
+    <div id="storyFinal">
+
+      <h2>
+        31 Ekim 2024'ten<br>
+        bugüne...
+      </h2>
+
+      <p>
+        Bir sürü fotoğrafımız oldu.<br>
+        Bir sürü anımız oldu.<br><br>
+
+        Ama benim en sevdiğim şey hâlâ aynı:<br>
+        <strong style="color:white;">
+          Sen.
+        </strong>
+        ❤️
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+  const finalScreenForStory =
+    document.getElementById("finalScreen");
+
+  if (finalScreenForStory) {
+
+    const storyButton =
+      document.createElement("button");
+
+    storyButton.id =
+      "openStoryButton";
+
+    storyButton.textContent =
+      "Ama hikâye burada bitmedi... ❤️";
+
+    finalScreenForStory.appendChild(
+      storyButton
+    );
+
+
+    storyButton.addEventListener(
+      "click",
+      () => {
+
+        finalScreenForStory
+          .classList.add("hidden");
+
+        const storyScreen =
+          document.getElementById(
+            "ourStoryScreen"
+          );
+
+        storyScreen
+          .classList.add("active");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+        setTimeout(
+          revealMemories,
+          300
+        );
+
+      }
+    );
+
+  }
+
+
+  function revealMemories() {
+
+    const memories =
+      document.querySelectorAll(
+        ".memory"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(
+            entry => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add("visible");
+
+              }
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.16
+        }
+      );
+
+    memories.forEach(
+      memory =>
+        observer.observe(memory)
+    );
+
+  }
+
+</script>
 </body>
+
 </html>
