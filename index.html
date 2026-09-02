@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+
+  <title>For Nil ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #24111b 0%, #080808 38%, #000 100%);
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      min-height: 100vh;
+      width: 100%;
+      padding: 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* TERMINAL */
+
+    .terminal {
+      width: 100%;
+      max-width: 430px;
+      text-align: left;
+      font-family: "SFMono-Regular", Consolas, monospace;
+    }
+
+    .terminal-title {
+      color: #777;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+
+    .terminal-line {
+      color: #f1f1f1;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 28px;
+    }
+
+    .green {
+      color: #63ff96;
+    }
+
+    .pink {
+      color: #ff7ca8;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: #fff;
+      vertical-align: middle;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* FOUND SCREEN */
+
+    .found {
+      animation: fadeIn 1s ease;
+    }
+
+    .mini {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .name {
+      font-size: clamp(48px, 15vw, 76px);
+      font-weight: 700;
+      letter-spacing: -3px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #ff89ae);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 38px;
+    }
+
+    .heart-button {
+      border: 0;
+      padding: 17px 28px;
+      border-radius: 999px;
+      background: white;
+      color: #111;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 220px;
+      transition: transform 0.2s ease;
+    }
+
+    .heart-button:active {
+      transform: scale(0.95);
+    }
+
+    /* HEART SCAN */
+
+    .heart-wrap {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      margin-bottom: 35px;
+    }
+
+    .big-heart {
+      font-size: 125px;
+      line-height: 190px;
+      animation: pulse 1s infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 74, 128, 0.45));
+    }
+
+    .scan {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      top: 15%;
+      background: #ff6492;
+      box-shadow: 0 0 14px #ff6492;
+      animation: scanning 1.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes scanning {
+      from { top: 18%; }
+      to { top: 82%; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* MESSAGE */
+
+    .message-card {
+      max-width: 420px;
+      animation: fadeUp 1s ease;
+    }
+
+    .tiny-heart {
+      font-size: 44px;
+      margin-bottom: 25px;
+      animation: pulse 1.3s infinite;
+    }
+
+    .message-card h1 {
+      font-size: 37px;
+      line-height: 1.08;
+      margin-bottom: 28px;
+      letter-spacing: -1.5px;
+    }
+
+    .message-card p {
+      color: #c9c9c9;
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .signature {
+      margin-top: 38px;
+      color: white !important;
+      font-weight: 600;
+    }
+
+    .final-button {
+      margin-top: 20px;
+      border: 1px solid #333;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-size: 15px;
+    }
+
+    /* FINAL */
+
+    .final-title {
+      font-size: clamp(50px, 16vw, 78px);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .final-text {
+      font-size: 18px;
+      color: #bbb;
+      line-height: 1.7;
+      max-width: 360px;
+    }
+
+    .heart-particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      animation: floatUp 3s ease-out forwards;
+      z-index: 999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.5) rotate(0deg);
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-110vh) scale(1.5) rotate(35deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .easter {
+      position: fixed;
+      bottom: 18px;
+      right: 20px;
+      color: #333;
+      font-family: monospace;
+      font-size: 15px;
+      background: transparent;
+      border: 0;
+      padding: 12px;
+    }
+
+    .secret-box {
+      position: fixed;
+      left: 20px;
+      right: 20px;
+      bottom: 80px;
+      max-width: 420px;
+      margin: auto;
+      background: rgba(20,20,20,.96);
+      border: 1px solid #333;
+      padding: 22px;
+      border-radius: 22px;
+      color: white;
+      line-height: 1.6;
+      animation: fadeUp .5s ease;
+      z-index: 1000;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. TERMINAL -->
+
+  <section id="terminalScreen" class="screen">
+    <div class="terminal">
+
+      <div class="terminal-title">
+        LOVE_OS v1.0
+      </div>
+
+      <div id="line1" class="terminal-line"></div>
+      <div id="line2" class="terminal-line"></div>
+      <div id="line3" class="terminal-line"></div>
+      <div id="line4" class="terminal-line"></div>
+      <div id="line5" class="terminal-line"></div>
+
+      <div class="terminal-line">
+        <span class="cursor"></span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 2. FOUND -->
+
+  <section id="foundScreen" class="screen hidden">
+
+    <div class="found">
+
+      <div class="mini">
+        SEARCH COMPLETE
+      </div>
+
+      <h1 class="name">
+        Nil Kar
+      </h1>
+
+      <p class="subtitle">
+        8.2 milyar insan arasından<br>
+        sistem yalnızca bir kişiyi seçti.
+      </p>
+
+      <button
+        id="continueButton"
+        class="heart-button"
+      >
+        Devam etmek için dokun ❤️
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- 3. HEART SCAN -->
+
+  <section id="scanScreen" class="screen hidden">
+
+    <div class="heart-wrap">
+
+      <div class="big-heart">
+        ❤️
+      </div>
+
+      <div class="scan"></div>
+
+    </div>
+
+    <div class="mini">
+      HEART VERIFICATION
+    </div>
+
+    <h2>
+      Kalp eşleşmesi kontrol ediliyor...
+    </h2>
+
+  </section>
+
+
+  <!-- 4. MESSAGE -->
+
+  <section id="messageScreen" class="screen hidden">
+
+    <div class="message-card">
+
+      <div class="tiny-heart">
+        ❤️
+      </div>
+
+      <h1>
+        İyi ki doğdun Nil.
+      </h1>
+
+      <p>
+        Bugün sana klasik bir doğum günü mesajı yazmak istemedim.
+        Çünkü sen benim için birkaç cümleye sığacak biri değilsin.
+      </p>
+
+      <p>
+        Hayatıma girdiğin günden beri bazı şeyler daha güzel,
+        bazı anlar daha anlamlı ve bazı günler sadece sen olduğun
+        için daha özel.
+      </p>
+
+      <p>
+        Belki her şeyi mükemmel yapamıyorum.
+        Ama seni sevdiğim bir gerçek ve bunun değişmesini
+        hiç istemiyorum.
+      </p>
+
+      <p>
+        Yeni yaşında yüzünden gülümsemenin eksik olmadığı,
+        istediğin her şeye biraz daha yaklaştığın ve beraber
+        çok daha fazla anı biriktirdiğimiz bir yıl diliyorum.
+      </p>
+
+      <p class="signature">
+        İyi ki varsın. ❤️
+      </p>
+
+      <button
+        id="finalButton"
+        class="final-button"
+      >
+        Son bir şey var...
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- 5. FINAL -->
+
+  <section id="finalScreen" class="screen hidden">
+
+    <h1 class="final-title">
+      Happy<br>
+      Birthday<br>
+      Nil. ❤️
+    </h1>
+
+    <p class="final-text">
+      Bu kodun bir sonu var.<br>
+      Ama umarım bizim hikâyemizin yok.
+    </p>
+
+  </section>
+
+
+  <!-- EASTER EGG -->
+
+  <button
+    id="easterButton"
+    class="easter"
+  >
+    &lt;/&gt;
+  </button>
+
+  <div
+    id="secret"
+    class="secret-box hidden"
+  >
+    <strong>Developer secret unlocked 🔓</strong>
+    <br><br>
+    Sana verebileceğim en güzel şeyi kodlamaya çalıştım...
+    sonra fark ettim ki en güzel şey zaten hayatımda.
+    <br><br>
+    O da sensin. ❤️
+  </div>
+
+
+  <script>
+
+    const wait = ms =>
+      new Promise(resolve => setTimeout(resolve, ms));
+
+
+    async function typeText(element, text, speed = 42) {
+
+      for (let i = 0; i < text.length; i++) {
+
+        element.innerHTML += text[i];
+
+        await wait(speed);
+
+      }
+
+    }
+
+
+    async function boot() {
+
+      await typeText(
+        document.getElementById("line1"),
+        "> initializing LOVE_OS..."
+      );
+
+      await wait(500);
+
+
+      await typeText(
+        document.getElementById("line2"),
+        "> accessing memory..."
+      );
+
+      await wait(500);
+
+
+      document.getElementById("line3").innerHTML =
+        '> <span class="green">connection established ✓</span>';
+
+      await wait(800);
+
+
+      await typeText(
+        document.getElementById("line4"),
+        "> searching for the most important person..."
+      );
+
+      await wait(1400);
+
+
+      document.getElementById("line5").innerHTML =
+        '> <span class="pink">1 special person found ❤️</span>';
+
+      await wait(1600);
+
+
+      document
+        .getElementById("terminalScreen")
+        .classList.add("hidden");
+
+      document
+        .getElementById("foundScreen")
+        .classList.remove("hidden");
+
+    }
+
+
+    boot();
+
+
+    document
+      .getElementById("continueButton")
+      .addEventListener("click", async () => {
+
+        document
+          .getElementById("foundScreen")
+          .classList.add("hidden");
+
+        document
+          .getElementById("scanScreen")
+          .classList.remove("hidden");
+
+        if (navigator.vibrate) {
+          navigator.vibrate(100);
+        }
+
+        await wait(2800);
+
+        document
+          .getElementById("scanScreen")
+          .classList.add("hidden");
+
+        document
+          .getElementById("messageScreen")
+          .classList.remove("hidden");
+
+      });
+
+
+    document
+      .getElementById("finalButton")
+      .addEventListener("click", () => {
+
+        document
+          .getElementById("messageScreen")
+          .classList.add("hidden");
+
+        document
+          .getElementById("finalScreen")
+          .classList.remove("hidden");
+
+        heartExplosion();
+
+      });
+
+
+    function heartExplosion() {
+
+      const hearts = [
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "🤍"
+      ];
+
+      for (let i = 0; i < 35; i++) {
+
+        setTimeout(() => {
+
+          const heart =
+            document.createElement("div");
+
+          heart.className =
+            "heart-particle";
+
+          heart.textContent =
+            hearts[
+              Math.floor(
+                Math.random() * hearts.length
+              )
+            ];
+
+          heart.style.left =
+            Math.random() * 100 + "vw";
+
+          heart.style.bottom =
+            "-30px";
+
+          heart.style.fontSize =
+            18 +
+            Math.random() * 25 +
+            "px";
+
+          document.body.appendChild(heart);
+
+          setTimeout(
+            () => heart.remove(),
+            3200
+          );
+
+        }, i * 70);
+
+      }
+
+    }
+
+
+    let easterCount = 0;
+
+
+    document
+      .getElementById("easterButton")
+      .addEventListener("click", () => {
+
+        easterCount++;
+
+        if (easterCount >= 3) {
+
+          document
+            .getElementById("secret")
+            .classList.remove("hidden");
+
+          easterCount = 0;
+
+        }
+
+      });
+
+
+    document
+      .getElementById("secret")
+      .addEventListener("click", () => {
+
+        document
+          .getElementById("secret")
+          .classList.add("hidden");
+
+      });
+
+  </script>
+
+</body>
+</html>
