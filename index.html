@@ -1163,6 +1163,536 @@
   }
 
 </script>
+
+<!-- ================================= -->
+<!-- LEVEL 2 — NIL QUIZ 🔐 -->
+<!-- ================================= -->
+
+<style>
+  #quizScreen {
+    display: none;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, #251019 0%, #080808 42%, #000 100%);
+    color: white;
+    padding: 55px 22px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  }
+
+  #quizScreen.active {
+    display: block;
+  }
+
+  .quiz-wrap {
+    max-width: 430px;
+    margin: auto;
+  }
+
+  .quiz-level {
+    color: #ff86aa;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-title {
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+  }
+
+  .quiz-sub {
+    color: #999;
+    line-height: 1.7;
+    margin-bottom: 38px;
+  }
+
+  .quiz-progress {
+    height: 5px;
+    background: #222;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 35px;
+  }
+
+  #quizProgressBar {
+    width: 0%;
+    height: 100%;
+    background: #ff719c;
+    transition: width .4s ease;
+  }
+
+  .question-number {
+    font-size: 12px;
+    color: #777;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  #quizQuestion {
+    font-size: 27px;
+    line-height: 1.25;
+    margin-bottom: 25px;
+  }
+
+  #quizAnswers {
+    display: grid;
+    gap: 12px;
+  }
+
+  .quiz-answer {
+    width: 100%;
+    min-height: 58px;
+    border-radius: 18px;
+    border: 1px solid #292929;
+    background: #111;
+    color: white;
+    text-align: left;
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+
+  .quiz-answer:active {
+    transform: scale(.98);
+  }
+
+  #quizFeedback {
+    min-height: 45px;
+    margin-top: 22px;
+    color: #aaa;
+    line-height: 1.5;
+  }
+
+  #quizComplete {
+    display: none;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  #quizComplete h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+  }
+
+  #quizComplete p {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+
+  #nextLevelButton,
+  #startQuizButton {
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 650;
+    background: white;
+    color: #111;
+  }
+
+  #startQuizButton {
+    display: block;
+    margin: 35px auto 0;
+  }
+
+  .unlock {
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px solid #292929;
+    border-radius: 20px;
+    color: #ff8caf;
+    font-family: monospace;
+    font-size: 14px;
+  }
+</style>
+
+
+<section id="quizScreen">
+
+  <div class="quiz-wrap">
+
+    <div class="quiz-level">
+      LEVEL 2 / LOCKED 🔐
+    </div>
+
+    <h1 class="quiz-title">
+      Küçük bir test,<br>
+      minik farem.
+    </h1>
+
+    <p class="quiz-sub">
+      Bir sonraki sürprize ulaşmak için
+      bazı şeyleri hatırladığını kanıtlaman gerekiyor. 🐭❤️
+    </p>
+
+    <div class="quiz-progress">
+      <div id="quizProgressBar"></div>
+    </div>
+
+    <div id="quizGame">
+
+      <div
+        id="questionNumber"
+        class="question-number"
+      ></div>
+
+      <h2 id="quizQuestion"></h2>
+
+      <div id="quizAnswers"></div>
+
+      <div id="quizFeedback"></div>
+
+    </div>
+
+
+    <div id="quizComplete">
+
+      <div style="font-size:60px;margin-bottom:20px;">
+        🔓
+      </div>
+
+      <h2>
+        Access granted.
+      </h2>
+
+      <p>
+        Tamam bebeğim...<br>
+        testi geçtin. 😌❤️
+        <br><br>
+        Ama daha bitmedi.
+      </p>
+
+      <div class="unlock">
+        NEXT_SURPRISE.exe unlocked ✓
+      </div>
+
+      <br>
+
+      <button id="nextLevelButton">
+        Level 3'e geç ❤️
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+  const quizQuestions = [
+
+    {
+      question:
+        "Biz hangi tarihte tanıştık? ❤️",
+
+      answers: [
+        "31 Ekim 2024",
+        "3 Eylül 2024",
+        "31 Aralık 2024",
+        "14 Şubat 2025"
+      ],
+
+      correct: 0,
+
+      wrong:
+        "Aşkım... bunu unutmuş olamazsın. 😭 Tekrar dene."
+    },
+
+    {
+      question:
+        "Bu ilişkinin gerçek patronu kim? 🐾",
+
+      answers: [
+        "Ege",
+        "Nil",
+        "Lucy",
+        "Tabii ki yine Nil"
+      ],
+
+      correct: 2,
+
+      wrong:
+        "Yanlış. Lucy bunu duysa bizi evden kovar. 🐶"
+    },
+
+    {
+      question:
+        "Sana söylediğim en saçma ama en sevdiğim hitap hangisi? 🐭",
+
+      answers: [
+        "Minik farem",
+        "Prensesim",
+        "Kuşum",
+        "Boncuğum"
+      ],
+
+      correct: 0,
+
+      wrong:
+        "İpucu: 🐭 ... hadi bebeğim."
+    },
+
+    {
+      question:
+        "Ve son soru... Benim en sevdiğim manzara hangisi?",
+
+      answers: [
+        "Paris",
+        "Deniz",
+        "Eyfel Kulesi",
+        "Sen"
+      ],
+
+      correct: 3,
+
+      wrong:
+        "Çok güzel seçim ama doğru cevap senden daha güzel değil. ❤️"
+    }
+
+  ];
+
+
+  let quizIndex = 0;
+
+
+  function renderQuizQuestion() {
+
+    const data =
+      quizQuestions[quizIndex];
+
+    document
+      .getElementById("questionNumber")
+      .textContent =
+      "QUESTION " +
+      (quizIndex + 1) +
+      " / " +
+      quizQuestions.length;
+
+    document
+      .getElementById("quizQuestion")
+      .textContent =
+      data.question;
+
+    const answerBox =
+      document.getElementById(
+        "quizAnswers"
+      );
+
+    answerBox.innerHTML = "";
+
+    document
+      .getElementById("quizFeedback")
+      .textContent = "";
+
+
+    data.answers.forEach(
+      (answer, answerIndex) => {
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "quiz-answer";
+
+        button.textContent =
+          answer;
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            checkQuizAnswer(
+              answerIndex,
+              button
+            );
+
+          }
+        );
+
+        answerBox.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById("quizProgressBar")
+      .style.width =
+      (
+        quizIndex /
+        quizQuestions.length *
+        100
+      ) + "%";
+
+  }
+
+
+  function checkQuizAnswer(
+    selected,
+    button
+  ) {
+
+    const data =
+      quizQuestions[quizIndex];
+
+    if (
+      selected ===
+      data.correct
+    ) {
+
+      button.style.borderColor =
+        "#55d98b";
+
+      button.style.color =
+        "#65e69a";
+
+      document
+        .getElementById(
+          "quizFeedback"
+        )
+        .textContent =
+        "Doğru. ❤️";
+
+
+      setTimeout(
+        () => {
+
+          quizIndex++;
+
+          if (
+            quizIndex <
+            quizQuestions.length
+          ) {
+
+            renderQuizQuestion();
+
+          } else {
+
+            finishQuiz();
+
+          }
+
+        },
+        650
+      );
+
+    } else {
+
+      button.style.borderColor =
+        "#ff668c";
+
+      document
+        .getElementById(
+          "quizFeedback"
+        )
+        .textContent =
+        data.wrong;
+
+      setTimeout(
+        () => {
+
+          button.style.borderColor =
+            "#292929";
+
+        },
+        600
+      );
+
+    }
+
+  }
+
+
+  function finishQuiz() {
+
+    document
+      .getElementById(
+        "quizGame"
+      )
+      .style.display =
+      "none";
+
+    document
+      .getElementById(
+        "quizComplete"
+      )
+      .style.display =
+      "block";
+
+    document
+      .getElementById(
+        "quizProgressBar"
+      )
+      .style.width =
+      "100%";
+
+  }
+
+
+  const storyFinalArea =
+    document.getElementById(
+      "storyFinal"
+    );
+
+
+  if (storyFinalArea) {
+
+    const startQuiz =
+      document.createElement(
+        "button"
+      );
+
+    startQuiz.id =
+      "startQuizButton";
+
+    startQuiz.textContent =
+      "Bir şey daha var... 🔐";
+
+    storyFinalArea.appendChild(
+      startQuiz
+    );
+
+
+    startQuiz.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById(
+            "ourStoryScreen"
+          )
+          .classList
+          .remove("active");
+
+        document
+          .getElementById(
+            "quizScreen"
+          )
+          .classList
+          .add("active");
+
+        quizIndex = 0;
+
+        renderQuizQuestion();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  }
+
+</script>
 </body>
 
 </html>
